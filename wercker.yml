@@ -1,0 +1,22 @@
+---
+box: golang
+build:
+  steps:
+      # setup workspace
+    - wercker/setup-go-workspace:
+      package-dir: github.com/gelidus/backbone
+      # getting dependencies
+    - script:
+      name: go get
+      code: go get ./...
+      # lint
+    - wercker/golint
+      # test
+    - script:
+      name: go test
+      code: go test ./...
+  after-steps:
+    - slack-notifier:
+      url: https://hooks.slack.com/services/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
+      channel: dev
+      username: backbone
