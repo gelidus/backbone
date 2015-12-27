@@ -14,4 +14,8 @@ var (
 		Addrs: []string{"192.168.99.100"},
 		Database: "test",
 	}
+
+	// rsa mock keys
+	PrivateKeyPath = "mock/cert/app.rsa"
+	PublicKeyPath = "mock/cert/app.rsa.pub"
 )
