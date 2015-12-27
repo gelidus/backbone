@@ -26,3 +26,7 @@ func (method *RSA) MethodName() string {
 func (method *RSA) SignKey() interface{} {
 	return method.private
 }
+
+func (method *RSA) VerifyKey() interface{} {
+	return method.public
+}
