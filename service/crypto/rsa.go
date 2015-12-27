@@ -6,17 +6,27 @@ import (
 )
 
 type RSA struct {
-	public  *rsa.PublicKey
 	private *rsa.PrivateKey
+	public  *rsa.PublicKey
 }
 
-func NewRSAMethod(privateKey, publicKey []byte) *RSA {
-	rsa := &RSA{
-		jwt.ParseRSAPrivateKeyFromPEM(privateKey),
-		jwt.ParseRSAPublicKeyFromPEM(publicKey),
+func NewRSAMethod(privateKey, publicKey []byte) (*RSA, error) {
+	private, err := jwt.ParseRSAPrivateKeyFromPEM(privateKey)
+	if err != nil {
+		return nil, err
 	}
 
-	return rsa
+	public, err := jwt.ParseRSAPublicKeyFromPEM(publicKey)
+	if err != nil {
+		return nil, err
+	}
+
+	rsa := &RSA{
+		private,
+		public,
+	}
+
+	return rsa, nil
 }
 
 func (method *RSA) MethodName() string {
