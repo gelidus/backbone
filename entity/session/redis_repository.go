@@ -25,8 +25,8 @@ func NewRedisRepository(users *redis.Client) *RedisRepository {
 }
 
 // ReadByUser will return the session based on the links id provided
-func (repo *RedisRepository) ReadByLink(link string) (*Session, error) {
-	session := &Session{}
+func (repo *RedisRepository) ReadByLink(link string) (*Model, error) {
+	session := &Model{}
 	token, err := repo.Get(link).Result()
 	if err != nil {
 		return nil, err
@@ -41,6 +41,6 @@ func (repo *RedisRepository) ReadByLink(link string) (*Session, error) {
 
 // Create will insert new session entity into the database
 // Warning: this will not check for the entity duplication
-func (repo *RedisRepository) Create(session *Session) (error) {
+func (repo *RedisRepository) Create(session *Model) (error) {
 	return repo.Set(session.Link.Hex(), session.Token, expiration).Err()
 }

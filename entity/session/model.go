@@ -8,7 +8,7 @@ import (
 
 // Session entity handles the session storing of the linking
 // objects. Any object id can be provided as the linked object
-type Session struct {
+type Model struct {
 	ID         bson.ObjectId `bson:"_id" json:"id" valid:"required"`
 	Link       bson.ObjectId `bson:"link" json:"link" valid:"required"`
 	Token      string `bson:"token" json:"token" valid:"required"`
@@ -16,6 +16,6 @@ type Session struct {
 }
 
 // Valid will validate the whole Session struct
-func (s *Session) Valid() (bool, error) {
+func (s *Model) Valid() (bool, error) {
 	return govalidator.ValidateStruct(s)
 }

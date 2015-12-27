@@ -34,20 +34,20 @@ func (suite *RedisSuite) SetupTest() {
 func (suite *RedisSuite) TestGetSet() {
 	// non existing key
 	sess, err := suite.Repo.ReadByLink(suite.link.Hex())
-	assert.Equal(suite.T(), (*Session)(nil), sess)
+	assert.Equal(suite.T(), (*Model)(nil), sess)
 	assert.Equal(suite.T(), client.Nil, err)
 
 	var expiration time.Duration = time.Hour * 1
 	token := "hello world"
 
 	// setting of key
-	err = suite.Repo.Create(&Session{Link: suite.link, Token: token, Expiration: expiration})
+	err = suite.Repo.Create(&Model{Link: suite.link, Token: token, Expiration: expiration})
 	assert.Equal(suite.T(), nil, err)
 
 	// get the existing key
 	sess, err = suite.Repo.ReadByLink(suite.link.Hex())
 	assert.Equal(suite.T(), nil, err)
-	assert.NotEqual(suite.T(), (*Session)(nil), sess)
+	assert.NotEqual(suite.T(), (*Model)(nil), sess)
 	assert.Equal(suite.T(), token, sess.Token)
 }
 

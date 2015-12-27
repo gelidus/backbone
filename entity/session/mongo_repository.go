@@ -18,14 +18,14 @@ func NewMongoRepository(users *mgo.Collection) *MongoRepository {
 }
 
 // ReadByUser will return the session based on the links id provided
-func (repo *MongoRepository) ReadByLink(link string) (*Session, error) {
-	session := &Session{}
+func (repo *MongoRepository) ReadByLink(link string) (*Model, error) {
+	session := &Model{}
 
 	return session, repo.Find(bson.M{"link": bson.ObjectIdHex(link)}).One(session)
 }
 
 // Create will insert new session entity into the database
 // Warning: this will not check for the entity duplication
-func (repo *MongoRepository) Create(session *Session) (error) {
+func (repo *MongoRepository) Create(session *Model) (error) {
 	return repo.Insert(session);
 }

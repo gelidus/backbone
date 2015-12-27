@@ -9,7 +9,7 @@ import (
 
 func TestSessionValidity(t *testing.T) {
 	link := bson.NewObjectId()
-	session := Session{bson.NewObjectId(), link, "abcd", time.Duration(50)}
+	session := Model{bson.NewObjectId(), link, "abcd", time.Duration(50)}
 
 	// correct session
 	validity, err := session.Valid()
@@ -17,7 +17,7 @@ func TestSessionValidity(t *testing.T) {
 	assert.Equal(t, nil, err)
 
 	// empty session
-	emptySession := Session{}
+	emptySession := Model{}
 	validity, err = emptySession.Valid()
 	assert.Equal(t, false, validity)
 	assert.NotEqual(t, nil, err)

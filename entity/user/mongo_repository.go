@@ -16,21 +16,21 @@ func NewMongoRepository(users *mgo.Collection) *MongoRepository {
 }
 
 // ReadByID will return the user based on the provided ID
-func (repo *MongoRepository) ReadByID(id string) (*User, error) {
-	user := &User{}
+func (repo *MongoRepository) ReadByID(id string) (*Model, error) {
+	user := &Model{}
 
 	return user, repo.FindId(bson.ObjectIdHex(id)).One(user)
 }
 
 // ReadByEmail will return the user based on the email provided
-func (repo *MongoRepository) ReadByEmail(email string) (*User, error) {
-	user := &User{}
+func (repo *MongoRepository) ReadByEmail(email string) (*Model, error) {
+	user := &Model{}
 
 	return user, repo.Find(bson.M{"email": email}).One(user)
 }
 
 // Create will insert new user entity into the database
 // Warning: this will not check for the entity duplication
-func (repo *MongoRepository) Create(user *User) (error) {
+func (repo *MongoRepository) Create(user *Model) (error) {
 	return repo.Insert(user);
 }

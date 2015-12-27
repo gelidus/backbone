@@ -6,7 +6,7 @@ import (
 )
 
 // User is main entity for any user
-type User struct {
+type Model struct {
 	ID             bson.ObjectId `bson:"_id" json:"id"`
 	Name           string        `bson:"name" json:"name"`
 	ProfilePicture string        `bson:"profile_picture" json:"profile_picture"`
@@ -17,6 +17,6 @@ type User struct {
 }
 
 // Valid will validate the whole user struct
-func (s *User) Valid() (bool, error) {
+func (s *Model) Valid() (bool, error) {
 	return govalidator.ValidateStruct(s)
 }
